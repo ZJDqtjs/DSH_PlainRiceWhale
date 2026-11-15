@@ -5,8 +5,8 @@
     "zh": "鲸鱼娘小独白 插件索引"
   },
   "description": {
-    "en": "Community index hosting dsh-whale-aside, installed from its public Git repository pinned to a commit.",
-    "zh": "收录 dsh-whale-aside 的社区索引，从公开 Git 仓库按 commit 钉版本安装。"
+    "en": "Community index hosting dsh-plain-rice-whale, installed from its public Git repository pinned to a commit.",
+    "zh": "收录 dsh-plain-rice-whale 的社区索引，从公开 Git 仓库按 commit 钉版本安装。"
   },
   "metadata": {
     "categories": {
@@ -52,7 +52,7 @@
   },
   "plugins": [
     {
-      "name": "dsh-whale-aside",
+      "name": "dsh-plain-rice-whale",
       "title": {
         "en": "Whale Girl Aside",
         "zh": "鲸鱼娘小独白"
@@ -91,11 +91,11 @@
       "versions": [
         {
           "version": "1.5.0",
-          "publishTimestamp": 1794725969,
+          "publishTimestamp": 1794732043,
           "source": {
             "type": "git",
             "url": "https://github.com/ZJDqtjs/DSH_PlainRiceWhale.git",
-            "commit": "562f1698bc812fa7eb6203a700b195a65317c45c",
+            "commit": "3f4f040cc6f35fc34a8ca137537d2ae4367362fa",
             "path": "whale-aside"
           },
           "engines": {
