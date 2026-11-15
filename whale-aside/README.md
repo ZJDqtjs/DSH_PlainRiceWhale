@@ -2,7 +2,9 @@
 
 DeepSeek Harness（DSH）插件 bundle。它给会话注入「鲸鱼娘」人设，并注册 `whale_aside` 工具：模型在每个新任务开始时写下的那句内心独白，会被渲染成聊天里的一只鲸鱼娘气泡，带情绪贴图，并用 Edge TTS 朗读出来。
 
-许可：代码 [MIT](../LICENSE)，美术与音频素材**不在 MIT 内**，见 [PROVENANCE.md](../PROVENANCE.md)。
+许可：代码 [MIT](https://github.com/ZJDqtjs/DSH_PlainRiceWhale/blob/main/LICENSE)，美术与音频素材**不在 MIT 内**，逐项来源与下架联系方式见 [PROVENANCE.md](https://github.com/ZJDqtjs/DSH_PlainRiceWhale/blob/main/PROVENANCE.md)。
+
+> 注意：这两个文件在**仓库根目录**，不在 npm 压缩包里（`files` 只覆盖本目录）。所以本段用绝对链接，并且下面「已知限制」与 `assets/NOTICE.md` 会把素材条款和下架联系方式**就地写全**，装了包的人不需要仓库文件也能看到。
 
 ## 注册了什么
 
@@ -51,7 +53,8 @@ pnpm --dir ~/.dsh/profiles/<profile> add -D link:/path/to/DSH_PlainRiceWhale/wha
 ## 已知限制
 
 - **`edge-tts` 不是官方 API。** 它调用 Microsoft Edge「大声朗读」的消费者端点，微软未公开声明允许再分发经此途径生成的音频，端点也可能随时变更、限流或停止。本插件**不打包** `edge-tts`，而是首次使用时 `pip install --target ~/.dsh/whale-tts/lib` 装到私有目录并以子进程调用（子进程调用不使本插件的 MIT 代码构成 GPL-3.0 衍生作品）。需要可商用的稳定方案请改用 Azure AI Speech 官方接口——合成失败时插件会自动回退到浏览器 Web Speech API，功能不中断。
-- 素材（贴图与试听音频）按 as-is 分发、不授予再许可，理由与逐项来源见 [PROVENANCE.md](../PROVENANCE.md)。
+- 素材（贴图与试听音频）按 as-is 分发、不授予再许可、不声明为原创作品；逐项来源与元数据核查见 [PROVENANCE.md](https://github.com/ZJDqtjs/DSH_PlainRiceWhale/blob/main/PROVENANCE.md)。
+- **权利主张（takedown）**：若您是素材的权利人，请通过 [GitHub DMCA](https://github.com/dmca/forms/dmca-takedown-notice)、[仓库安全通告](https://github.com/ZJDqtjs/DSH_PlainRiceWhale/security/advisories/new) 或邮件 <136884860+ZJDqtjs@users.noreply.github.com> 联系，注明权属与被指认的文件路径。承诺**收到有效通知 72 小时内先下架再沟通**（删除文件、移除引用条目、发布新版本，并从索引中撤掉该版本），无需先证明侵权成立。
 - 语音合成需要联网；离线时自动走浏览器系统音。
 
 ## 自检
