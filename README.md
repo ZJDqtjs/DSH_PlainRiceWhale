@@ -88,13 +88,13 @@ python tools/meme_verify.py        # 素材体检：尺寸、帧、透明占比�
 
 ## 插件市场索引
 
-DSH 的插件市场是**索引制**，没有中央提交入口：用户在 **Plugins → Experimental plugins → Custom plugin indexes** 打开开关，再在 **Discover** 页添加一个 index JSON 的 URL。本仓库自己托管一份：
+DSH 的插件市场是**索引制**，没有中央提交入口：用户在 **Plugins → Experimental plugins → Custom plugin indexes** 打开开关，再在 **Discover** 页添加一个 index JSON 的 URL。本仓库自己托管一份（GitHub Pages，源为 `main` 的 `/docs`，`docs/.nojekyll` 阻止 Jekyll 处理）：
 
 ```
-https://zjdqtjs.github.io/DSH_PlainRiceWhale/index.json
+https://zjdqtjs.github.io/DSH_PlainRiceWhale/market/index.json
 ```
 
-索引由 [tools/make_market_index.mjs](tools/make_market_index.mjs) 生成，并且**用官方规则集 `@deepseek-ai/dsh-plugin-market-index` 现场校验后才落盘**——format 1 有不少静默坑（每个版本必须有整数 `publishTimestamp`、`title` 必须含 `en`、`category`/`labels` 必须引用索引里已声明的 id、git 源要 40 位小写 commit，而 `engines.dsh` 写成 `>=0.2.2` 在 SemVer 预发布规则下**不匹配** `0.2.2-rc.3`）。
+索引文件放在 [`docs/market/`](docs/market)，由 [tools/make_market_index.mjs](tools/make_market_index.mjs) 生成，并且**用官方规则集 `@deepseek-ai/dsh-plugin-market-index` 现场校验后才落盘**——format 1 有不少静默坑（每个版本必须有整数 `publishTimestamp`、`title` 必须含 `en`、`category`/`labels` 必须引用索引里已声明的 id、git 源要 40 位小写 commit，而 `engines.dsh` 写成 `>=0.2.2` 在 SemVer 预发布规则下**不匹配** `0.2.2-rc.3`）。
 
 发新版本时三步：
 
@@ -102,7 +102,7 @@ https://zjdqtjs.github.io/DSH_PlainRiceWhale/index.json
 # 1) 改代码、bump whale-aside/package.json 的 version、提交并推送
 # 2) 用新 commit 重新生成并校验索引
 node tools/make_market_index.mjs "$(git rev-parse HEAD)"
-# 3) 提交 market/ 并推送，GitHub Pages 会随之更新
+# 3) 提交 docs/market/ 并推送，GitHub Pages 会随之更新
 ```
 
 安装目标被钉在**具体 commit** 上，所以索引里那条版本永远可复现：

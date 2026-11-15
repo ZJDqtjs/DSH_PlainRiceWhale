@@ -28,9 +28,11 @@ const flag = (name, fallback) => {
   return at !== -1 && argv[at + 1] !== undefined ? argv[at + 1] : fallback;
 };
 const commit = argv.find((a) => !a.startsWith('--'));
-const OUT_DIR = flag('--out', join(BASE, 'market'));
+const OUT_DIR = flag('--out', join(BASE, 'docs', 'market'));
 const REPO = 'ZJDqtjs/DSH_PlainRiceWhale';
-const INDEX_URL = flag('--url', `https://${REPO.split('/')[0].toLowerCase()}.github.io/${REPO.split('/')[1]}/index.json`);
+// GitHub Pages only accepts `/` or `/docs` as a legacy build source, so the index lives
+// under docs/market/ and is served from there.
+const INDEX_URL = flag('--url', `https://${REPO.split('/')[0].toLowerCase()}.github.io/${REPO.split('/')[1]}/market/index.json`);
 
 if (typeof commit !== 'string' || /^[0-9a-f]{40}$/.test(commit) === false) {
   console.error('usage: node tools/make_market_index.mjs <40-hex-commit> [--url <index URL>] [--out <dir>]');
@@ -156,7 +158,9 @@ try {
 }
 
 const target = marketInstallTarget(validated.plugins[0].name, validated.plugins[0].versions[0]);
-console.log(`wrote ${join('market', 'index.json')} and ${join('market', 'icon.svg')}`);
+const relOut = (name) => join(OUT_DIR, name).slice(BASE.length + 1);
+console.log(`wrote ${relOut('index.json')} and ${relOut('icon.svg')}`);
+console.log(`index URL users add -> ${INDEX_URL}`);
 console.log(`validated: format ${validated.format}, ${validated.plugins.length} plugin, `
   + `${validated.plugins[0].versions.length} version, title langs=${Object.keys(validated.title).join('/')}`);
 console.log(`icon resolved -> ${validated.plugins[0].icon}`);
