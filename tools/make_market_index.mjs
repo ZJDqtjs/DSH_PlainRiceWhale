@@ -52,15 +52,15 @@ function publishStamp() {
   return Math.floor(Date.now() / 1000);
 }
 
-const zhDescription = '鲸鱼娘小独白：注入鲸鱼娘人设并注册 whale_aside 工具，把模型每个新任务开始时的一句内心独白渲染成聊天里的鲸鱼娘气泡，带情绪贴图，并用 Edge TTS 朗读（默认晓伊 +22Hz，音色可在气泡面板或 ~/.dsh/whale-voice.json 自定义，合成失败自动回退浏览器系统音）。注意：语音走的是 Edge「大声朗读」的非官方消费者端点，微软未声明允许再分发其输出；美术素材按 as-is 分发、不含在 MIT 许可内，来源与下架联系方式见 PROVENANCE.md。';
-const enDescription = 'Whale Girl Aside: injects a whale-girl persona and registers the whale_aside tool, rendering the model\'s one-line inner monologue at the start of each task as a speech bubble with a mood sticker, spoken by Edge TTS (zh-CN-XiaoyiNeural +22 Hz by default; timbre configurable from the bubble badge or ~/.dsh/whale-voice.json, with automatic fallback to the browser voice). Note: the voice uses Edge Read Aloud\'s unofficial consumer endpoint, whose output Microsoft has not documented as redistributable; the artwork ships as-is and is outside the MIT license — see PROVENANCE.md.';
+const zhDescription = `鲸鱼娘小独白：注入鲸鱼娘人设并注册 whale_aside 工具，把模型每个新任务开始时的一句内心独白渲染成聊天里的鲸鱼娘气泡，带情绪贴图，并用 Edge TTS 朗读（默认晓伊 +22Hz，音色可在气泡面板或 ~/.dsh/whale-voice.json 自定义，合成失败自动回退浏览器系统音）。注意：语音走的是 Edge「大声朗读」的非官方消费者端点，微软未声明允许再分发其输出；美术素材按 as-is 分发、不含在 MIT 许可内，来源与下架联系方式见 PROVENANCE.md。`;
+const enDescription = `Whale Girl Aside: injects a whale-girl persona and registers the whale_aside tool, rendering the model's one-line inner monologue at the start of each task as a speech bubble with a mood sticker, spoken by Edge TTS (zh-CN-XiaoyiNeural +22 Hz by default; timbre configurable from the bubble badge or ~/.dsh/whale-voice.json, with automatic fallback to the browser voice). Note: the voice uses Edge Read Aloud's unofficial consumer endpoint, whose output Microsoft has not documented as redistributable; the artwork ships as-is and is outside the MIT license — see PROVENANCE.md.`;
 
 const index = {
   format: 1,
   title: { en: 'Whale Girl Aside index', zh: '鲸鱼娘小独白 插件索引' },
   description: {
-    en: 'Community index hosting dsh-whale-aside, installed from its public Git repository pinned to a commit.',
-    zh: '收录 dsh-whale-aside 的社区索引，从公开 Git 仓库按 commit 钉版本安装。',
+    en: `Community index hosting ${pkg.name}, installed from its public Git repository pinned to a commit.`,
+    zh: `收录 ${pkg.name} 的社区索引，从公开 Git 仓库按 commit 钉版本安装。`,
   },
   metadata: {
     categories: {

@@ -19,7 +19,9 @@ samples/         语音试听样本
 
 ## 安装
 
-插件包名是 **`dsh-whale-aside`**（1.5.0 起；此前叫 `@local/dsh-whale-aside`）。它是**纯 ESM、零依赖**的 bundle：`index.js` 只 import `node:` 内置模块，`client.js` 走 DSH 的 `window.__ModuleLoader__`，因此装进 profile 后不需要 `npm install`。
+插件包名是 **`dsh-plain-rice-whale`**。仓库名保留大写（`DSH_PlainRiceWhale`，GitHub 允许），但**包名不能照抄仓库名**：npm 规定新包名必须全小写（`validate-npm-package-name` 里大写只对历史遗留的 `validForOldPackages` 成立，对 `validForNewPackages` 不成立，registry 发布会拒），而 DSH 的 format 1 索引验证器更是直接把大写判成 `must be a valid npm package name`。注意 `npm publish --dry-run` 对大写**本地是放行的**，别被它骗。
+
+它是**纯 ESM、零依赖**的 bundle：`index.js` 只 import `node:` 内置模块，`client.js` 走 DSH 的 `window.__ModuleLoader__`，因此装进 profile 后不需要 `npm install`。
 
 从插件市场安装见本文末「插件市场索引」。本地开发用链接方式：
 

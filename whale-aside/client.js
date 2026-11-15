@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-  id: 'dsh-whale-aside',
+  id: 'dsh-plain-rice-whale',
   factory(require) {
     const React = require('react');
     const h = React.createElement;

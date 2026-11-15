@@ -1,4 +1,4 @@
-# 鲸鱼娘小独白 · dsh-whale-aside
+# 鲸鱼娘小独白 · dsh-plain-rice-whale
 
 DeepSeek Harness（DSH）插件 bundle。它给会话注入「鲸鱼娘」人设，并注册 `whale_aside` 工具：模型在每个新任务开始时写下的那句内心独白，会被渲染成聊天里的一只鲸鱼娘气泡，带情绪贴图，并用 Edge TTS 朗读出来。
 
