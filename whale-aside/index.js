@@ -19,7 +19,7 @@
  * route for speech first and falls back to the browser Web Speech API, and
  * shows a mood sticker.
  *
- * @module @local/dsh-whale-aside
+ * @module dsh-whale-aside
  */
 
 import { spawn } from 'node:child_process';

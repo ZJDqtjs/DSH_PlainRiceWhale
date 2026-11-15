@@ -1,9 +1,10 @@
 {
-  "name": "@local/dsh-whale-aside",
-  "version": "1.4.1",
-  "private": true,
-  "type": "module",
+  "name": "dsh-whale-aside",
+  "version": "1.5.0",
   "description": "鲸鱼娘小独白：whale-girl persona + whale_aside tool + 情绪贴图气泡 + 可自定义音色的 Edge TTS 语音.",
+  "license": "MIT",
+  "author": "ZJDqtjs",
+  "type": "module",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
@@ -16,8 +17,30 @@
     "cordis.patch.yml",
     "locale/*.json",
     "icon.svg",
+    "README.md",
     "assets"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZJDqtjs/DSH_PlainRiceWhale.git",
+    "directory": "whale-aside"
+  },
+  "homepage": "https://github.com/ZJDqtjs/DSH_PlainRiceWhale",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-bundle",
+    "dsh-plugin",
+    "cordis-plugin",
+    "persona",
+    "whale-girl",
+    "edge-tts",
+    "tts",
+    "speech-bubble"
+  ],
+  "engines": {
+    "dsh": ">=0.2.2-rc.3"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

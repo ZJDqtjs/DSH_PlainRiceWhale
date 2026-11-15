@@ -19,7 +19,9 @@ samples/         语音试听样本
 
 ## 安装
 
-插件是**纯 ESM、零依赖**的 bundle：`index.js` 只 import `node:` 内置模块，`client.js` 走 DSH 的 `window.__ModuleLoader__`，因此装进 profile 后不需要 `npm install`。
+插件包名是 **`dsh-whale-aside`**（1.5.0 起；此前叫 `@local/dsh-whale-aside`）。它是**纯 ESM、零依赖**的 bundle：`index.js` 只 import `node:` 内置模块，`client.js` 走 DSH 的 `window.__ModuleLoader__`，因此装进 profile 后不需要 `npm install`。
+
+从插件市场安装见本文末「插件市场索引」。本地开发用链接方式：
 
 ```bash
 # 以本地链接方式装进某个 profile（改动即时生效，无需重新打包）
