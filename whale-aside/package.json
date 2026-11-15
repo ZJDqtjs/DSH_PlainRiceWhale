@@ -1,9 +1,9 @@
 {
   "name": "@local/dsh-whale-aside",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "private": true,
   "type": "module",
-  "description": "鲸鱼娘小独白：whale-girl persona + whale_aside tool + mood 贴图气泡（7 GIF + 1 JPG）+ 可自定义音色的 Edge TTS 语音.",
+  "description": "鲸鱼娘小独白：whale-girl persona + whale_aside tool + 情绪贴图气泡 + 可自定义音色的 Edge TTS 语音.",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",

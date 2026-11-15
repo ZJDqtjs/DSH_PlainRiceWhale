@@ -86,4 +86,16 @@ python tools/meme_verify.py        # 素材体检：尺寸、帧、透明占比�
 
 ## 许可
 
-插件代码按仓库声明的许可使用。`assets/gifs/SOURCES.md` 保留了已退役动图素材的 **MIT** 署名（PC2005-cloud/dsh-pet）。
+本项目代码基于 [MIT License](LICENSE) 开源。
+
+⚠️ `assets/` 下的美术素材（图片 / 动图 / 音效）**不在 MIT 覆盖范围内**：它们由维护者提供或使用 AI 工具生成，按「原样（as-is）」随插件分发、仅供运行本插件使用，不授予再许可，也不声明为原创作品。逐项来源、元数据清理说明与权利主张（takedown）方式见 [PROVENANCE.md](PROVENANCE.md)。
+
+已退役动图素材的 **MIT** 署名（PC2005-cloud/dsh-pet）同时保留在
+[`whale-aside/assets/gifs/SOURCES.md`](whale-aside/assets/gifs/SOURCES.md) 与
+[PROVENANCE.md §4](PROVENANCE.md)。
+
+素材的隐私与元数据核查可以自行复现：
+
+```bash
+python tools/asset_metadata_audit.py
+```
