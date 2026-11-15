@@ -86,10 +86,34 @@ python tools/meme_verify.py        # 素材体检：尺寸、帧、透明占比�
 - **第三方媒体**：调研音色和贴图时抓下来的 B 站视频、语音包、桌宠素材原图、抓取页面与日志（约 70MB）。它们不归我们所有，也不该由我们分发；全部能用 `tools/` 里的抓取脚本重新获得。
 - **`.work/`**：一次性草稿、探测输出、TTS 试听、梗图原图。
 
+## 插件市场索引
+
+DSH 的插件市场是**索引制**，没有中央提交入口：用户在 **Plugins → Experimental plugins → Custom plugin indexes** 打开开关，再在 **Discover** 页添加一个 index JSON 的 URL。本仓库自己托管一份：
+
+```
+https://zjdqtjs.github.io/DSH_PlainRiceWhale/index.json
+```
+
+索引由 [tools/make_market_index.mjs](tools/make_market_index.mjs) 生成，并且**用官方规则集 `@deepseek-ai/dsh-plugin-market-index` 现场校验后才落盘**——format 1 有不少静默坑（每个版本必须有整数 `publishTimestamp`、`title` 必须含 `en`、`category`/`labels` 必须引用索引里已声明的 id、git 源要 40 位小写 commit，而 `engines.dsh` 写成 `>=0.2.2` 在 SemVer 预发布规则下**不匹配** `0.2.2-rc.3`）。
+
+发新版本时三步：
+
+```bash
+# 1) 改代码、bump whale-aside/package.json 的 version、提交并推送
+# 2) 用新 commit 重新生成并校验索引
+node tools/make_market_index.mjs "$(git rev-parse HEAD)"
+# 3) 提交 market/ 并推送，GitHub Pages 会随之更新
+```
+
+安装目标被钉在**具体 commit** 上，所以索引里那条版本永远可复现：
+
+```
+git+https://github.com/ZJDqtjs/DSH_PlainRiceWhale.git#<sha>&path:/whale-aside
+```
+
 ## 许可
 
 本项目代码基于 [MIT License](LICENSE) 开源。
-
 ⚠️ `assets/` 下的美术素材（图片 / 动图 / 音效）**不在 MIT 覆盖范围内**：它们由维护者提供或使用 AI 工具生成，按「原样（as-is）」随插件分发、仅供运行本插件使用，不授予再许可，也不声明为原创作品。逐项来源、元数据清理说明与权利主张（takedown）方式见 [PROVENANCE.md](PROVENANCE.md)。
 
 已退役动图素材的 **MIT** 署名（PC2005-cloud/dsh-pet）同时保留在
