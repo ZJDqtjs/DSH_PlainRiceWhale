@@ -1,0 +1,32 @@
+# 本地草稿：探测输出、梗图原图、TTS 试听、一次性脚本
+.work/
+
+# Python 字节码
+__pycache__/
+*.pyc
+
+# ---------------------------------------------------------------------------
+# 第三方媒体：调研音色和贴图时抓下来的东西，**不属于本仓库、也不该由我们分发**。
+# 全部可以用 tools/ 里的抓取脚本重新下载：bili_dl.py / pet_probe.py / repo_fetch.py
+# / bowlroll_dl.py，来源与授权见 whale-aside/assets/gifs/SOURCES.md。
+# ---------------------------------------------------------------------------
+tools/bili_src/
+tools/bili_voice/
+tools/bili_articles/
+tools/bili_probe_out/
+tools/bili_sheets/
+tools/voice_release/
+tools/pet_gifs/
+tools/repo_out/
+
+# 抓取回来的网页、探测日志、视频接触表
+*.log
+*.bin
+*.html
+*.mp4
+*.wav
+
+# 打包副本。贴图路由逐个读 whale-aside/assets/gifs/ 下的散文件，
+# 把 GIF 压进 zip 留在素材目录里 = 插件直接 404（曾经踩过）。
+*.zip
+node_modules/

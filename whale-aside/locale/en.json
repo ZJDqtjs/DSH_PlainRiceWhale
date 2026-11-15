@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Whale Girl Aside",
+    "description": "Injects the whale-girl persona and registers the whale_aside tool, whose one-line inner monologue renders as a speech bubble. The Host half speaks it with Edge TTS (zh-CN-XiaoyiNeural +22 Hz by default) and shows a mood GIF; the timbre is configurable per browser from the bubble badge or globally in ~/.dsh/whale-voice.json, and the badge always names the voice that actually spoke."
+  }
+}

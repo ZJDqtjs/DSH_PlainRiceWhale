@@ -1,0 +1,17 @@
+{
+ "mood": "meh",
+ "src": ".work/meme_src.jpg",
+ "box": [
+  138,
+  159,
+  850,
+  807
+ ],
+ "size": [
+  256,
+  233
+ ],
+ "quality": 85,
+ "bytes": 15441,
+ "over_budget": false
+}
