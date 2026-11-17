@@ -47,6 +47,12 @@
           "en": "Installed from Git",
           "zh": "从 Git 安装"
         }
+      },
+      "npm-source": {
+        "title": {
+          "en": "Installed from npm",
+          "zh": "从 npm 安装"
+        }
       }
     }
   },
@@ -90,12 +96,12 @@
       },
       "versions": [
         {
-          "version": "1.5.0",
-          "publishTimestamp": 1794732043,
+          "version": "1.5.1",
+          "publishTimestamp": 1794929634,
           "source": {
             "type": "git",
             "url": "https://github.com/ZJDqtjs/DSH_PlainRiceWhale.git",
-            "commit": "3f4f040cc6f35fc34a8ca137537d2ae4367362fa",
+            "commit": "9fbd613d05db5af34663f98b7a8f6bb894bdb9d3",
             "path": "whale-aside"
           },
           "engines": {
