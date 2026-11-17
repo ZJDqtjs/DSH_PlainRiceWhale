@@ -30,7 +30,7 @@ import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const inject = ['tools', 'systemPrompt', 'webServer'];
+export const inject = ['tools', 'systemPrompt', 'webServer', 'connection'];
 
 /** Persona plus aside protocol, injected into every assembled system prompt. */
 const PERSONA_TEXT = `【鲸鱼娘人设 · CETACEA LOLI MODE】
@@ -583,9 +583,17 @@ function voiceHealth(settings) {
   };
 }
 
-/** Answer the voice route: synthesis on POST, cached MP3 on GET. */
-async function serveVoice(req, res) {
+/**
+ * Answer the voice route: synthesis on POST, cached MP3 on GET.
+ * @param ctx - the plugin context carrying the `connection` service.
+ * @param req - the Node request.
+ * @param res - the Node response this handler owns.
+ */
+async function serveVoice(ctx, req, res) {
   try {
+    if (admitted(ctx, req, res) === false) {
+      return;
+    }
     const method = req !== null && typeof req === 'object' ? req.method : undefined;
     let pathname = VOICE_ROUTE;
     try {
@@ -784,19 +792,52 @@ const WHALE_ASIDE_TOOL = {
 };
 
 /**
+ * Ask the host whether it would admit this request to its own API.
+ *
+ * `webServer.register` mounts a route on the bare HTTP listener, so DSH's
+ * Host/Origin fence and its browser login do not run for it by themselves:
+ * a page open in the browser could reach these routes, and a forged Host
+ * would reach them too. `connection.requestRejection` is the host's own gate —
+ * 403 for a forged Host or a cross-site Origin, 401 when the login is on and
+ * the request carries no session, `undefined` when the host would admit it.
+ * @param ctx - the plugin context carrying the `connection` service.
+ * @param req - the Node request.
+ * @param res - the Node response this handler owns.
+ * @returns whether the handler should continue; when false the request is
+ *   already answered with the host's rejection code.
+ */
+function admitted(ctx, req, res) {
+  const rejection = ctx.connection.requestRejection(req);
+  if (rejection === undefined) {
+    return true;
+  }
+  try {
+    res.writeHead(rejection, { 'cache-control': 'no-store' });
+    res.end();
+  } catch (ignored) {
+    /* the response was already ended or destroyed; nothing left to report. */
+  }
+  return false;
+}
+
+/**
  * Answer one `/whale-aside/assets/...` request from {@link ASSETS_ROOT}.
  *
- * The response lifecycle belongs entirely to this handler: it answers 405 for
- * non-GET/HEAD methods, 404 for anything outside the mood-sticker whitelist (so a
- * traversal attempt never reaches the filesystem), and streams the bytes with a
- * content type taken from the extension and a short public cache lifetime.
- * Errors never throw.
+ * The response lifecycle belongs entirely to this handler: it answers the
+ * host's rejection code first, then 405 for non-GET/HEAD methods, 404 for
+ * anything outside the mood-sticker whitelist (so a traversal attempt never
+ * reaches the filesystem), and streams the bytes with a content type taken
+ * from the extension and a short public cache lifetime. Errors never throw.
+ * @param ctx - the plugin context carrying the `connection` service.
  * @param req - the Node request.
  * @param res - the Node response this handler owns.
  * @returns a promise settled once the response is ended.
  */
-async function serveAsset(req, res) {
+async function serveAsset(ctx, req, res) {
   try {
+    if (admitted(ctx, req, res) === false) {
+      return;
+    }
     const method = req !== null && typeof req === 'object' ? req.method : undefined;
     if (method !== 'GET' && method !== 'HEAD') {
       res.writeHead(405, { allow: 'GET, HEAD', 'cache-control': 'no-store' });
@@ -840,7 +881,12 @@ async function serveAsset(req, res) {
  * same-origin routes (mood stickers and synthesized voice). Every registration
  * is an effect owned by this plugin, so unloading removes it and frees the
  * route paths.
- * @param ctx - the plugin context carrying `tools`, `systemPrompt`, and `webServer`.
+ *
+ * Both handlers take `ctx` because a `webServer` route bypasses the host's
+ * Host/Origin fence and login; each one asks `connection.requestRejection`
+ * before doing any work. See {@link admitted}.
+ * @param ctx - the plugin context carrying `tools`, `systemPrompt`,
+ *   `webServer`, and `connection`.
  */
 export function apply(ctx) {
   ctx.effect(() => ctx.systemPrompt.section({
@@ -854,12 +900,12 @@ export function apply(ctx) {
   ctx.effect(() => ctx.webServer.register({
     kind: 'prefix',
     path: ASSETS_ROUTE,
-    handler: serveAsset,
+    handler: (req, res) => serveAsset(ctx, req, res),
   }));
 
   ctx.effect(() => ctx.webServer.register({
     kind: 'prefix',
     path: VOICE_ROUTE,
-    handler: serveVoice,
+    handler: (req, res) => serveVoice(ctx, req, res),
   }));
 }
